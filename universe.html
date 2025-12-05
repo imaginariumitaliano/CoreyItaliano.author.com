@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The Universe of the Dova Sku Series | Corey Italiano</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explore the universe of the Dova Sku Series by Corey Italiano: Earth, Catora, Tual, Seutor, Patchave, the Svixen, ancient uplift wars, and the Transync network.">
+  <style>
+    :root {
+      --bg: #020617;
+      --accent: #ff6b2c;
+      --accent-soft: #f59e0b;
+      --ink: #f9fafb;
+      --ink-muted: #9ca3af;
+      --card-radius: 1rem;
+      --shadow-soft: 0 22px 45px rgba(0,0,0,0.55);
+      --max-width: 1100px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #111827 0, #020617 45%, #000 100%);
+      color: var(--ink);
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header {
+      border-bottom: 1px solid rgba(148,163,184,0.18);
+      backdrop-filter: blur(18px);
+      background: linear-gradient(to right, rgba(15,23,42,0.92), rgba(15,23,42,0.75));
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .nav-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .nav-brand {
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.25rem;
+      padding: 0;
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+    nav a {
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: var(--ink);
+    }
+
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    .page-kicker {
+      text-transform: uppercase;
+      letter-spacing: 0.26em;
+      font-size: 0.75rem;
+      color: var(--accent-soft);
+      margin-bottom: 0.5rem;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 3vw + 1rem, 2.7rem);
+      margin: 0 0 0.4rem;
+    }
+
+    .page-lede {
+      color: var(--ink-muted);
+      max-width: 42rem;
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-lore {
+      background: radial-gradient(circle at top left, rgba(148,163,184,0.25), transparent 55%),
+                  linear-gradient(145deg, #020617, #020617 60%, #050816 100%);
+      border-radius: 1.4rem;
+      padding: 1.8rem 1.7rem 2rem;
+      border: 1px solid rgba(148,163,184,0.32);
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 2.8rem;
+    }
+
+    .tagline {
+      font-size: 0.9rem;
+      color: var(--ink-muted);
+    }
+
+    section {
+      margin-bottom: 3rem;
+    }
+
+    section h2 {
+      font-size: 1.4rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .section-kicker {
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 0.75rem;
+      color: var(--accent-soft);
+      margin-bottom: 0.3rem;
+    }
+
+    .section-lede {
+      font-size: 0.9rem;
+      color: var(--ink-muted);
+      max-width: 40rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.4fr);
+      gap: 1.7rem;
+      align-items: flex-start;
+    }
+
+    .card {
+      background: linear-gradient(145deg, #020617, #020617 60%, #050816 100%);
+      border-radius: var(--card-radius);
+      padding: 1.3rem 1.4rem 1.5rem;
+      border: 1px solid rgba(148,163,184,0.3);
+      box-shadow: var(--shadow-soft);
+      font-size: 0.92rem;
+      color: var(--ink-muted);
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      margin: 0 0 0.4rem;
+      color: var(--ink);
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin: 0.3rem 0 0.7rem;
+    }
+
+    .badge {
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.5);
+      padding: 0.2rem 0.65rem;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--ink-muted);
+    }
+
+    .badge-strong {
+      border-color: var(--accent-soft);
+      color: var(--accent-soft);
+    }
+
+    .list-tight {
+      padding-left: 1.1rem;
+      margin: 0.4rem 0 0;
+    }
+
+    .list-tight li {
+      margin-bottom: 0.35rem;
+    }
+
+    .timeline {
+      border-left: 2px solid rgba(148,163,184,0.5);
+      padding-left: 1rem;
+      margin-top: 0.7rem;
+    }
+
+    .timeline-item {
+      margin-bottom: 0.9rem;
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -1.11rem;
+      top: 0.3rem;
+      width: 0.55rem;
+      height: 0.55rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      box-shadow: 0 0 0 4px rgba(245,158,11,0.2);
+    }
+
+    .timeline-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--ink-muted);
+      margin-bottom: 0.1rem;
+    }
+
+    .timeline-title {
+      font-size: 0.95rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .glossary-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 1.6rem;
+    }
+
+    .glossary-entry {
+      margin-bottom: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--ink-muted);
+    }
+
+    .glossary-entry strong {
+      color: var(--ink);
+    }
+
+    .note {
+      font-size: 0.8rem;
+      color: var(--ink-muted);
+      margin-top: 0.6rem;
+    }
+
+    footer {
+      border-top: 1px solid rgba(30,64,175,0.4);
+      padding: 1.5rem 1.5rem 2rem;
+      font-size: 0.8rem;
+      color: var(--ink-muted);
+      text-align: center;
+      background: #020617;
+    }
+
+    @media (max-width: 768px) {
+      .nav-inner {
+        padding-inline: 1rem;
+      }
+      nav ul {
+        gap: 0.75rem;
+        font-size: 0.8rem;
+      }
+      .grid-2,
+      .glossary-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">COREY ITALIANO</a>
+    <nav>
+      <ul>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#series">Series</a></li>
+        <li><a href="books.html">Books</a></li>
+        <li><a href="#top">Universe</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="page-kicker">Universe Guide</div>
+  <h1>The World of the Dova Sku Series</h1>
+  <p class="page-lede">
+    A spoiler-light tour of the major worlds, factions, and technologies
+    that shape Christopher Thompkins’ life—from a quiet home on Earth to
+    the ruins of Catora and the burning edge of Svixen space.
+  </p>
+
+  <div class="hero-lore">
+    <p class="tagline">
+      Ancient wars, dead empires, and a Transync network that was never meant
+      for war. The Dova Sku universe is a place where our species is late
+      to the party—and the bill is already due.
+    </p>
+  </div>
+
+  <!-- WORLDS -->
+  <section id="worlds">
+    <div class="section-kicker">Worlds &amp; Frontiers</div>
+    <h2>Key Worlds</h2>
+    <p class="section-lede">
+      Everything starts sixty light-years from home, on a world humanity thinks
+      it understands. It doesn’t. From Earth, the crew of the <em>Light Skipper</em>
+      travels to the newly discovered exoplanet, Catora, also known as Randt to 
+      its original inhabitants.
+    </p>
+
+    <div class="grid-2">
+      <!-- Earth -->
+      <article class="card">
+        <h3>Earth</h3>
+        <div class="badge-row">
+          <span class="badge badge-strong">Origin World</span>
+          <span class="badge">Late Arrival</span>
+        </div>
+        <p>
+          To most of its inhabitants, Earth is still a blue dot with a messy
+          history and a shaky future. To older civilizations, it’s something
+          else: a world that once brushed against a much larger war and then
+          forgot. Twelve thousand years of amnesia and myth stand between what
+          humans believe about their past and what actually happened.
+        </p>
+        <ul class="list-tight">
+          <li><strong>Tech level:</strong> Pre-FTL, experimental EM Tether.</li>
+          <li><strong>Conflict driver:</strong> Future Svixen invasion looms
+            over every decision the crew makes.</li>
+          <li><strong>Symbol:</strong> Home worth crossing a galaxy for.</li>
+        </ul>
+      </article>
+
+      <!-- Catora / Randt -->
+      <article class="card">
+        <h3>Catora / Randt</h3>
+        <div class="badge-row">
+          <span class="badge badge-strong">First Contact World</span>
+          <span class="badge">Forest World</span>
+        </div>
+        <p>
+          A forest-covered alien world once inhabited by the Sepu, an
+          amtillian species. Catora is humanity’s first real contact point with
+          nonhuman intelligence—and the place where the illusion of a clean,
+          simple colony world dies. Some of the crew choose to remain, helping
+          build a fragile human foothold and preserve what’s left.
+        </p>
+        <ul class="list-tight">
+          <li><strong>Role:</strong> Birthplace of the Dova Sku and the first
+              real proof of the Svixen threat.</li>
+          <li><strong>Theme:</strong> Survival, guilt, and rebuilding in the
+              shadow of catastrophe.</li>
+        </ul>
+      </article>
+
+      <!-- Tual -->
+      <article class="card">
+        <h3>Tual</h3>
+        <div class="badge-row">
+          <span class="badge badge-strong">Maakét Homeworld</span>
+          <span class="badge">Stealth &amp; Innovation</span>
+        </div>
+        <p>
+          Tual is the homeworld of the Maaket, stealthy feline-like warriors
+          whose culture blends lethal precision with rigid honor. It is a
+          technologically advanced world, and becomes a key ally in the fight
+          against the Svixen. Josh remains here for a time, working with
+          Maaket engineers to develop weapons, defensive systems, and other 
+          upgrades that will keep the crew alive.
+        </p>
+        <ul class="list-tight">
+          <li><strong>Notable allies:</strong> Princess Cashy, Ankir, and the
+              Maaket leadership.</li>
+          <li><strong>Specialty:</strong> Weapons systems, braiding technology,
+              and skilled in combat.</li>
+        </ul>
+      </article>
+
+      <!-- Seutor -->
+      <article class="card">
+        <h3>Seutor</h3>
+        <div class="badge-row">
+          <span class="badge badge-strong">Tuaca and Natuul Homeworld</span>
+          <span class="badge">Jungle &amp; Desert World</span>
+        </div>
+        <p>
+          An ancient, jungle- and desert-riddled planet ruled by the Tuaca,
+          an ape-like, deeply nature-focused species, and the Natuul, and 
+          ork-like, highly tribal species. Seutor is where the <em>Ascendant</em> 
+          is obtained, and where a Skrema duel is fought and won to save the 
+          world from a Svixen invasion. The Tuaca ally with the humans, but 
+          walk a line between neutrality and involvement, offering wisdom and 
+          shelter rather than outright allegiance. Two Tuaca warriors join 
+          the human crew of the <em>Ascendant</em> as they journey to Earth.
+        </p>
+        <ul class="list-tight">
+          <li><strong>Key figures:</strong> Patron Rohga, Guardian Phostop,
+              Posis and Tivay.</li>
+          <li><strong>Story role:</strong> Place of alliance, farewell, and
+              a hard-earned hope.</li>
+        </ul>
+      </article>
+
+      <!-- Patchave -->
+      <article class="card">
+        <h3>Patchave</h3>
+        <div class="badge-row">
+          <span class="badge badge-strong">Cruillum Homeworld</span>
+          <span class="badge">Desert &amp; Resonance</span>
+        </div>
+        <p>
+          Patchave is the desert world of the Cruillum, lizard-like humanoids
+          who have turned survival into an art form. Their civilization is
+          built on harmonic resonance and “singing to the glass,” manipulating
+          materials and technology through precise vibrational control. The
+          crew stops here to repair the <em>Ascendant</em> after a brutal
+          space battle with the Svixen—and to use the local Transync gate to
+          return to Seutor for parts.
+        </p>
+        <ul class="list-tight">
+          <li><strong>Specialty:</strong> Resonant engineering and glass-based
+              tech no one else fully understands.</li>
+          <li><strong>Key figures:</strong> Kess.</li>
+          <li><strong>Function in the story:</strong> Crucial repair yard and
+              waypoint under pressure.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- FACTIONS -->
+  <section id="factions">
+    <div class="section-kicker">Powers &amp; Players</div>
+    <h2>Factions in the Shadows of an Old War</h2>
+    <p class="section-lede">
+      By the time humans step out into the wider galaxy, the sides have already
+      been chosen. The only question is which side will use them—and which
+      side will erase them.
+    </p>
+
+    <div class="grid-2">
+      <article class="card">
+        <h3>Humanity</h3>
+        <div class="badge-row">
+          <span class="badge badge-strong">Newcomers</span>
+          <span class="badge">High Variance</span>
+        </div>
+        <p>
+          Human beings are late to interstellar travel, but they’re adaptable,
+          stubborn, and bad at doing what they’re told. On Catora, that mix
+          produces Lieutenant Christopher Thompkins: a navy SEAL with a broken
+          past who becomes the “Dova Sku”—Hell Machine—after becoming part cyborg 
+          and binding with an ancient AI named Liam.
+        </p>
+        <ul class="list-tight">
+          <li><strong>Strengths:</strong> Improvisation, emotional resilience,
+              refusal to accept “inevitable” outcomes.</li>
+          <li><strong>Weaknesses:</strong> Fragmented politics, limited tech,
+              almost no understanding of the true rules of the game.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h3>The Svixen</h3>
+        <div class="badge-row">
+          <span class="badge badge-strong">Imperial Power</span>
+          <span class="badge">Extinction-Level Threat</span>
+        </div>
+        <p>
+          To their enemies, the Svixen are a nightmare made of teeth, fire,
+          and doctrine. To themselves, they’re the righteous enforcers of a
+          brutal peace. They don’t merely conquer worlds—they correct them,
+          pruning species and civilizations that grow in ways they consider
+          dangerous.
+        </p>
+        <ul class="list-tight">
+          <li><strong>Doctrine:</strong> Control the networks, control the
+              species that depend on them.</li>
+          <li><strong>Relationship to Earth:</strong> Historically distant,
+              uncomfortably interested once humans leave Earth.</li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="grid-2">
+      <article class="card">
+        <h3>The Maakét of Tual</h3>
+        <div class="badge-row">
+          <span class="badge badge-strong">Allied Warriors</span>
+          <span class="badge">Stealth Specialists</span>
+        </div>
+        <p>
+          Sleek, feline, and lethally efficient, the Maakét are as much
+          engineers as they are warriors. They specialize in weapons systems,
+          energy shields, and ways of not being where the enemy thinks you are.
+          Their politics are complicated, but once they commit to a fight,
+          they commit with claws out.
+        </p>
+        <ul class="list-tight">
+          <li><strong>Key allies:</strong> Princess Cashy, her sister Nessa,
+              and the warrior Ankir.</li>
+          <li><strong>Contribution:</strong> Drake Scale cloaking suits,
+              reverse-energy concepts, and upgrades that keep the
+              <em>Ascendant</em> hard to pin down.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h3>The Tuaca of Seutor</h3>
+        <div class="badge-row">
+          <span class="badge badge-strong">Spiritual Warriors</span>
+          <span class="badge">Neutral Ground</span>
+        </div>
+        <p>
+          The Tuaca are ape-like, physically imposing, and deeply spiritual.
+          Seutor’s deserts and jungles have taught them patience and perspective.
+          They try to stay neutral in the wider conflict, but neutrality has
+          limits when the Svixen bring war to their doorstep.
+        </p>
+        <ul class="list-tight">
+          <li><strong>Key figures:</strong> Patron Rohga, Guardian Phostop,
+              warriors like Posis and Tivay.</li>
+          <li><strong>Contribution:</strong> The gift of the
+              <em>Ascendant</em>, shielding tech, ship weapons, and a moral 
+              compass in a very amoral war.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h3>The Natuul of Seutor</h3>
+        <div class="badge-row">
+          <span class="badge badge-strong">Tribal Warriors</span>
+          <span class="badge">Not Friends, Not Enemies</span>
+        </div>
+        <p>
+          A hulking orcish species with advanced tech but no centralized 
+          government. Tribal culture with frequent conflicts with the Tuaca. 
+          Progress comes from raiding and reverse-engineering Tuaca tech.
+        </p>
+        </ul>
+      </article>
+    </div>
+
+    <div class="grid-2">
+      <article class="card">
+        <h3>The Cruillum of Patchave</h3>
+        <div class="badge-row">
+          <span class="badge badge-strong">Resonant Engineers</span>
+          <span class="badge">Harsh-World Survivors</span>
+        </div>
+        <p>
+          The Cruillum are lizard-like humanoids who turned a desert world into
+          a laboratory for harmonic technology. Their “singing to the glass”
+          techniques let them coax weapons, shields, and structures into forms
+          no one else can replicate. They’re not eager to pick sides, and
+          they understand the value of keeping everyone at arm's length.
+        </p>
+        <ul class="list-tight">
+          <li><strong>Contribution:</strong> Critical ship repairs, Transync
+              gate access, and tech tuned to the <em>Ascendant</em>’s needs.</li>
+          <li><strong>Stance:</strong> Practical, cautious, and always aware
+              of how much heat is being spent.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h3>The Aku’Ra &amp; Original Uplifters of Species</h3>
+        <div class="badge-row">
+          <span class="badge badge-strong">Precursors</span>
+          <span class="badge">Unfinished Business</span>
+        </div>
+        <p>
+          Long gone—or smart enough to stay off stage—the Aku’Ra are the
+          rumored architects behind the Transync network and numerous
+          uplifted species. Between them, their subjects, and the Svixen,
+          the galaxy is full of client species: cultures uplifted, drafted into
+          a war, and then left to pick up the pieces when empires fell.
+        </p>
+        <p>
+          Some become allies, some enemies, and some simply refuse to pick a
+          side—until Chris, Liam, and the <em>Ascendant</em> crash into their
+          politics.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <!-- TECHNOLOGY -->
+  <section id="technology">
+    <div class="section-kicker">Tools &amp; Ruins</div>
+    <h2>Technology that Shouldn’t Be in Human Hands</h2>
+    <p class="section-lede">
+      For most of human history, the galaxy has run on systems Earth didn’t
+      know existed. The moment Chris and Liam connect to one, everything
+      changes.
+    </p>
+
+    <div class="grid-2">
+      <article class="card">
+        <h3>The EM Tether</h3>
+        <div class="badge-row">
+          <span class="badge badge-strong">Human FTL</span>
+          <span class="badge">Experimental</span>
+        </div>
+        <p>
+          Earth’s first real stab at faster-than-light travel, the EM Tether
+          is less “warp drive” and more “galactic slingshot”—a way of riding
+          precisely shaped electromagnetic fields along precomputed paths.
+          It’s good enough to reach Catora. It is absolutely not designed to
+          handle the kind of traffic, interference, and weapons that older
+          civilizations throw around as a matter of course.
+        </p>
+      </article>
+
+      <article class="card">
+        <h3>The Transync Network</h3>
+        <div class="badge-row">
+          <span class="badge badge-strong">Ancient Infrastructure</span>
+          <span class="badge">Travel &amp; Storage</span>
+        </div>
+        <p>
+          Transync is more than communication and more than transit. It’s a
+          mesh of stations, relays, and protocols built to synchronize cities,
+          fleets, and even entire planets. When Chris links with Liam in an
+          old Catoran station, he taps into a faint echo of what the network
+          used to be—and paints a target on himself in the process.
+        </p>
+        <ul class="list-tight">
+          <li><strong>Capabilities:</strong> Fleet coordination, information
+              storage, matter translation under tightly controlled rules.</li>
+          <li><strong>Risks:</strong> Exploitable by empires, catastrophic
+              failure modes on planetary scales.</li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="grid-2">
+      <article class="card">
+        <h3>Dova Sku: “Hell Machine”</h3>
+        <div class="badge-row">
+          <span class="badge badge-strong">Hybrid Operator</span>
+          <span class="badge">Living Weapon</span>
+        </div>
+        <p>
+          “Dova Sku” is an alien phrase that roughly translates to
+          “Hell Machine”—a battlefield role where a cybernetic soldier 
+          becomes a terror in battle. In Chris’s case, that also comes with 
+          an alien AI named Liam, and the merge is anything but clean. The 
+          result is faster reaction times, deeper situational awareness, 
+          and a man who’s never fully alone in his own head again.
+        </p>
+        <ul class="list-tight">
+          <li><strong>Upside:</strong> One person can fight like a squadron.</li>
+          <li><strong>Downside:</strong> The line between “tool” and “person”
+              gets blurry on both sides.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h3>The <em>Ascendant</em></h3>
+        <div class="badge-row">
+          <span class="badge badge-strong">Captured Warship</span>
+          <span class="badge">Moving Fault Line</span>
+        </div>
+        <p>
+          The <em>Ascendant</em> is more than a ship—it’s a mobile embassy,
+          weapons platform, and cultural pressure cooker. Human survivors,
+          Maakét weapons tech, Tuaca shielding, and Cruillum-tuned systems
+          all share the same hull while trying not to kill each other before
+          the Svixen do.
+        </p>
+        <p>
+          Everywhere it goes, it drags the past with it: old treaties, old
+          grudges, and technologies that were never meant to merge.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section id="timeline">
+    <div class="section-kicker">Big Picture</div>
+    <h2>High-Level Timeline (Spoiler-Light)</h2>
+    <p class="section-lede">
+      This isn’t a full canon timeline, just enough to understand where the
+      series sits relative to older wars and future trouble.
+    </p>
+
+    <article class="card">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-label">Long Before Human History</div>
+          <div class="timeline-title">Rise of the Aku’Ra &amp; Millenium Wars</div>
+          <p>
+            The Aku’Ra built the Transync network, uplifted client
+            species, and fought wars over who gets to shape the galaxy. 
+            The Svixen emerge as one of several powers willing to burn 
+            worlds to enforce their version of order.
+          </p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-label">Prehistoric Earth</div>
+          <div class="timeline-title">A Brush with Something Bigger</div>
+          <p>
+            Earth isn’t entirely ignored. Whether as a test case, a mistake,
+            or something stranger, humanity brushes against the wider conflict.
+            Whatever happened, it’s buried under myth, ice, and twelve thousand
+            years of forgetting.
+          </p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-label">Near Future</div>
+          <div class="timeline-title">Discovery of Catora &amp; the EM Tether</div>
+          <p>
+            Humanity finds Catora and builds the EM Tether to reach it. The
+            mission that carries Chris, Josh, and the rest of the crew to
+            this “new beginning” unknowingly lights up an old node in the
+            Transync network.
+          </p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-label"><em>Transync</em></div>
+          <div class="timeline-title">Contact, Ruins, and the First Fall</div>
+          <p>
+            The crew of the <em>Light Skipper</em> lands on Catora,discovers
+            old ruins, alien creatures, and the first hints of the Transync 
+            network. The Svixen answer the signal in force. Chris becomes 
+            Dova Sku in a last stand that will define who survives to tell 
+            anyone what happened.
+          </p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-label"><em>Ascendant</em></div>
+          <div class="timeline-title">A Warship and a Way Home</div>
+          <p>
+            The survivors take control of the <em>Ascendant</em> and try to
+            fight their way back toward Earth through a galaxy already scarred
+            by Svixen campaigns. Old alliances, broken empires, and new
+            enemies all converge around one uncomfortable fact: if Earth
+            doesn’t know what’s coming, it won’t have a say in what happens
+            next.
+          </p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-label">Book 3 &amp; Beyond</div>
+          <div class="timeline-title">Secrets of the Network</div>
+          <p>
+            The final movements of the Dova Sku saga push deeper into the
+            Transync network and the truth of why any of this was built in
+            the first place. Some wars end. Others just change shape.
+          </p>
+        </div>
+      </div>
+      <p class="note">
+        This page is meant as a companion to the books, not a replacement—major
+        twists, character fates, and specific battles still live in the novels.
+      </p>
+    </article>
+  </section>
+
+  <!-- GLOSSARY -->
+  <section id="glossary">
+    <div class="section-kicker">Quick Reference</div>
+    <h2>Glossary</h2>
+    <p class="section-lede">
+      A fast-reference list for the names and terms that come up most often
+      in the Dova Sku universe.
+    </p>
+
+    <div class="glossary-grid">
+      <div>
+        <div class="glossary-entry">
+          <strong>Dova Sku</strong> – Alien term roughly translated as
+          “Hell Machine.” A hybrid operator role where a cyborg soldier
+          is able to overcome the odds. In Svixen history, their warriors
+          are supposed to only be able to be killed by a soldier of hell. 
+          The Hell Machine in Svixen history was a Svixen warrior who 
+          completely eradicated a competing tribe single-handedly. 
+        </div>
+        <div class="glossary-entry">
+          <strong>Liam</strong> – A sentient station AI originally bound to
+          a Transync station in Catora’s infrastructure. After a catastrophic 
+          merge event, he lives inside Chris’s mind as both ally and constant 
+          companion.
+        </div>
+        <div class="glossary-entry">
+          <strong>Transync</strong> – A galaxy-spanning network system used
+          for travel, coordination, communication, and matter translation.
+          Older than human civilization and not built for Svixen use.
+        </div>
+        <div class="glossary-entry">
+          <strong>EM Tether</strong> – Earth’s experimental faster-than-light
+          travel method, used to send the first mission to Catora.
+        </div>
+        <div class="glossary-entry">
+          <strong>Maakét</strong> – Feline-like warriors from Tual. Experts
+          in weapons, shield tech, and precision warfare.
+        </div>
+        <div class="glossary-entry">
+          <strong>Tuaca</strong> – Ape-like, spiritual warriors from Seutor,
+          known for honor, ritual, and a fierce sense of balance.
+        </div>
+      </div>
+      <div>
+        <div class="glossary-entry">
+          <strong>Cruillum</strong> – Lizard-like humanoids from Patchave who
+          use harmonic resonance and “singing to the glass” to shape advanced
+          technology.
+        </div>
+        <div class="glossary-entry">
+          <strong>Svixen</strong> – A powerful, empire-scale species whose
+          “peacekeeping” looks a lot like extermination from the outside.
+        </div>
+        <div class="glossary-entry">
+          <strong>Aku’Ra</strong> – A precursor civilization associated with
+          uplifting programs, Transync infrastructure, and a long trail of
+          morally questionable decisions.
+        </div>
+        <div class="glossary-entry">
+          <strong><em>Light Skipper</em></strong> – The ship that carries
+          humanity’s first Catora expedition.
+        </div>
+        <div class="glossary-entry">
+          <strong><em>Ascendant</em></strong> – A secured civilian ship turned
+          warship, lifeboat, embassy, and battering ram as the survivors push 
+          back toward Earth.
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  &copy; <span id="year"></span> Corey Italiano. All rights reserved.
+</footer>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
