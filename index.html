@@ -442,6 +442,19 @@
         padding-inline: 1rem;
       }
     }
+    .logo-strip {
+       margin-top: 2.5rem;
+       margin-bottom: 0.5rem;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+    }
+
+   .logo-strip img {
+       max-width: 180px;
+       height: auto;
+       opacity: 0.9;
+    }
   </style>
 </head>
 <body>
@@ -639,11 +652,15 @@
         </small>
       </div>
     </section>
-  </main>
+    <div class="logo-strip">
+    <img src="images/Logo.png" alt="Corey Italiano logo">
+  </div>
+</main>
 
-  <footer>
-    &copy; <span id="year"></span> Corey Italiano. All rights reserved.
-  </footer>
+<footer>
+  &copy; <span id="year"></span> Corey Italiano. All rights reserved.
+</footer>
+
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
