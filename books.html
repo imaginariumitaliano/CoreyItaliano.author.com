@@ -137,7 +137,7 @@
       border: 1px solid rgba(148,163,184,0.3);
       box-shadow: var(--shadow-soft);
       display: grid;
-      grid-template-columns: 90px minmax(0, 1fr);
+      grid-template-columns: 240px minmax(0, 1fr);
       gap: 1rem;
       align-items: flex-start;
     }
@@ -151,15 +151,18 @@
       overflow: hidden;
       border: 1px solid rgba(148,163,184,0.5);
       background: #020617;
-      max-height: 150px;
+      width: 240px;
+      height: auto;
     }
+
 
     .book-cover img {
       width: 100%;
-      height: 100%;
+      height: auto;
       display: block;
       object-fit: cover;
     }
+
 
     .book-meta-label {
       font-size: 0.75rem;
@@ -392,28 +395,30 @@
         </div>
       </article>
 
-      <!-- Book 3 placeholder -->
-      <article class="book-panel placeholder">
-        <div>
-          <div class="book-meta-label">Book 3 · The Dova Sku Series</div>
-          <h3>Title TBA (Coming Soon)</h3>
-          <p class="book-description">
-            The conclusion to the Dova Sku saga. Chris, Liam, and the crew of
-            the <em>Ascendant</em> dive deeper into the Transync web, searching
-            for the full truth about the Aku’Ra, the Svixen, and what really
-            happened to Earth twelve thousand years ago. Details and release
-            date will be announced once the book moves into final drafting.
-          </p>
-          <div class="format-row">
-            <span class="pill">In Development</span>
-          </div>
-          <div class="links-row">
-            <a href="index.html#newsletter">Get Release Alerts</a>
-          </div>
-        </div>
-      </article>
+     <!-- Book 3 placeholder -->
+<article class="book-panel placeholder" id="book3">
+  <div class="book-cover">
+    <img src="images/ComingSoon.jpg" alt="Coming Soon cover">
+  </div>
+
+  <div>
+    <div class="book-meta-label">Book 3 · The Dova Sku Series</div>
+    <h3>Title TBA (Coming Soon)</h3>
+    <p class="book-description">
+      The conclusion to the Dova Sku saga. Chris, Liam, and the crew of
+      the <em>Ascendant</em> dive deeper into the Transync web, searching
+      for the full truth about the Aku’Ra, the Svixen, and what really
+      happened to Earth twelve thousand years ago. Details and release
+      date will be announced once the book moves into final drafting.
+    </p>
+    <div class="format-row">
+      <span class="pill">In Development</span>
     </div>
-  </section>
+    <div class="links-row">
+      <a href="index.html#newsletter">Get Release Alerts</a>
+    </div>
+  </div>
+</article>
 
   <!-- STANDALONE NOVELS -->
   <section id="standalones">
