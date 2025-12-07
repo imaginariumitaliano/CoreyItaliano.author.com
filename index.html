@@ -85,6 +85,27 @@
     nav a:hover {
       color: var(--ink);
     }
+    
+    .about-photo-wrapper {
+      margin-top: 1.8rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .about-photo {
+      width: 260px;            
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 18px 35px rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+    .about-photo img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
 
     main {
       max-width: var(--max-width);
@@ -557,6 +578,12 @@
             pivot. He has no plans to stop telling stories about dangerous 
             planets, stubborn humans, and the mysteries of the universe.
           </p>
+        <div class="about-photo-wrapper">
+          <div class="about-photo">
+            <img src="images/headshot.png" alt="Author photo of Corey Italiano">
+        </div>
+      </div>
+
         </div>
 
         <div class="series-card" id="series">
