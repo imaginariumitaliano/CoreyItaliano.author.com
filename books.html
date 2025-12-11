@@ -261,34 +261,30 @@
       height: auto;
       opacity: 0.9;
     }
-   @media (max-width: 768px) {
+  @media (max-width: 768px) {
     .nav-inner {
       padding-inline: 1rem;
-      flex-wrap: wrap; /* let brand and nav stack if needed */
+      flex-wrap: wrap;
     }
 
     nav ul {
       gap: 0.6rem;
       font-size: 0.8rem;
-      flex-wrap: wrap;          /* this is the key */
-      justify-content: flex-end; /* or center, if you prefer */
+      flex-wrap: wrap;
+      justify-content: flex-end;
     }
 
-    .grid-2,
-    .glossary-grid {
+    .book-panel {
       grid-template-columns: minmax(0, 1fr);
     }
 
-    .world-panel {
-      grid-template-columns: minmax(0, 1fr);
-    }
-
-    .world-image {
+    .book-cover {
       width: 100%;
-      max-width: 320px;
-      margin: 0 auto;
+      max-width: 240px;
+      margin: 0 auto 1rem;  /* center the cover & add space under it */
     }
   }
+
 
   </style>
 </head>
