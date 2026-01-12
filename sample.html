@@ -280,6 +280,34 @@
       background: #020617;
     }
 
+    .footer-contact {
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+      color: var(--ink-muted);
+    }
+
+    .footer-contact a {
+      color: var(--accent-soft);
+      text-decoration: none;
+    }
+
+    .footer-contact a:hover {
+      text-decoration: underline;
+    }
+
+    .footer-socials {
+      margin-top: 0.35rem;
+      font-size: 0.75rem;
+    }
+
+    .footer-socials a {
+      color: var(--accent-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin: 0 0.4rem;
+    }
+
+
     .logo-strip {
       margin-top: 2.5rem;
       margin-bottom: 0.5rem;
@@ -587,7 +615,25 @@
 
 <footer>
   &copy; <span id="year"></span> Corey Italiano. All rights reserved.
+
+  <div class="footer-contact">
+    Contact:
+    <a href="mailto:imaginariumitaliano@gmail.com">
+      imaginariumitaliano@gmail.com
+    </a>
+  </div>
+
+  <div class="footer-socials">
+    <a href="https://www.facebook.com/Imaginariumitaliano" target="_blank" rel="noopener">
+      Facebook
+    </a>
+    ·
+    <a href="https://www.instagram.com/coreyitaliano.author/" target="_blank" rel="noopener">
+      Instagram
+    </a>
+  </div>
 </footer>
+
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
