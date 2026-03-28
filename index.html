@@ -5,15 +5,6 @@
   <title>Corey Italiano | Science Fiction Author</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Official site of Corey Italiano, author of the Dova Sku Series: Transync and Ascendant. Military sci-fi, alien worlds, and ancient galactic wars.">
-
-  <!-- Open Graph / Social Sharing -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Corey Italiano | Science Fiction Author">
-  <meta property="og:description" content="Military sci-fi, alien worlds, and ancient galactic wars. Author of the Dova Sku Series: Transync and Ascendant.">
-  <meta property="og:image" content="images/TransyncFrontV2.jpg">
-  <meta property="og:url" content="https://coreyitaliano.com">
-  <meta name="twitter:card" content="summary_large_image">
-
   <style>
     :root {
       --bg: #050710;
@@ -81,6 +72,7 @@
       padding: 0;
       margin: 0;
       font-size: 0.9rem;
+      flex-wrap: wrap;
     }
 
     nav a {
@@ -92,27 +84,6 @@
 
     nav a:hover {
       color: var(--ink);
-    }
-
-    .about-photo-wrapper {
-      margin-top: 1.8rem;
-      display: flex;
-      justify-content: center;
-    }
-
-    .about-photo {
-      width: 260px;
-      border-radius: 1rem;
-      overflow: hidden;
-      box-shadow: 0 18px 35px rgba(0, 0, 0, 0.45);
-      border: 1px solid rgba(148, 163, 184, 0.35);
-    }
-
-    .about-photo img {
-      width: 100%;
-      height: auto;
-      display: block;
-      object-fit: cover;
     }
 
     main {
@@ -148,12 +119,13 @@
       z-index: -1;
     }
 
-    .hero-kicker {
+    .hero-kicker,
+    .section-kicker {
       text-transform: uppercase;
-      letter-spacing: 0.28em;
+      letter-spacing: 0.22em;
       font-size: 0.75rem;
       color: var(--accent-soft);
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.4rem;
     }
 
     .hero h1 {
@@ -175,40 +147,47 @@
       margin-bottom: 1.75rem;
     }
 
+    .hero-meta {
+      font-size: 0.85rem;
+      color: var(--ink-muted);
+    }
+
     .hero-books {
       position: relative;
       width: 320px;
       height: 420px;
+      margin: 0 auto;
     }
 
     .hero-books .book {
       position: absolute;
       width: 220px;
-      border-radius: 8px;
+      height: auto;
+      border-radius: 0.8rem;
       box-shadow: 0 20px 40px rgba(0,0,0,0.6);
       transition: transform 0.3s ease;
     }
 
     .hero-books .transync {
-      transform: rotate(-30deg);
+      left: 30px;
+      top: 30px;
+      transform: rotate(-12deg);
       z-index: 2;
-      left: 40px;
-      top: 20px;
     }
 
     .hero-books .ascendant {
-      transform: rotate(30deg);
+      left: 120px;
+      top: 55px;
+      transform: rotate(12deg);
       z-index: 1;
-      left: 100px;
-      top: 60px;
     }
 
     .hero-books:hover .transync {
-      transform: rotate(-25deg) scale(1.05);
+      transform: rotate(-10deg) scale(1.03);
     }
 
     .hero-books:hover .ascendant {
-      transform: rotate(25deg) scale(1.05);
+      transform: rotate(10deg) scale(1.03);
     }
 
     .btn {
@@ -248,49 +227,6 @@
       background: rgba(15,23,42,0.9);
     }
 
-    .hero-meta {
-      font-size: 0.85rem;
-      color: var(--ink-muted);
-    }
-
-    .hero-cover {
-      justify-self: center;
-    }
-
-    .hero-cover-inner {
-      position: relative;
-      max-width: 260px;
-      width: 100%;
-      aspect-ratio: 2.8 / 4;
-      border-radius: 1rem;
-      overflow: hidden;
-      box-shadow: 0 26px 60px rgba(0,0,0,0.85);
-      border: 1px solid rgba(148,163,184,0.5);
-      background: #020617;
-    }
-
-    .hero-cover img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .hero-badge {
-      position: absolute;
-      bottom: 1.1rem;
-      left: 1.1rem;
-      padding: 0.35rem 0.75rem;
-      border-radius: 999px;
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      background: rgba(15,23,42,0.88);
-      border: 1px solid rgba(148,163,184,0.6);
-      color: var(--ink-muted);
-      backdrop-filter: blur(8px);
-    }
-
     section {
       margin-bottom: 3.5rem;
     }
@@ -300,19 +236,45 @@
       margin-bottom: 0.4rem;
     }
 
-    .section-kicker {
-      text-transform: uppercase;
-      letter-spacing: 0.22em;
-      font-size: 0.75rem;
-      color: var(--accent-soft);
-      margin-bottom: 0.4rem;
-    }
-
     .section-lede {
       color: var(--ink-muted);
       max-width: 42rem;
       font-size: 0.95rem;
       margin-bottom: 1.5rem;
+    }
+
+    .app-section {
+      background: linear-gradient(145deg, #020617, #020617 45%, #050816 100%);
+      border-radius: 1.5rem;
+      padding: 2rem 1.8rem 2.2rem;
+      border: 1px solid rgba(148,163,184,0.25);
+      box-shadow: var(--shadow-soft);
+      text-align: center;
+    }
+
+    .app-section h2 {
+      margin-bottom: 0.2rem;
+    }
+
+    .app-subtitle {
+      color: var(--ink);
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 0 0 0.8rem;
+    }
+
+    .app-description {
+      color: var(--ink-muted);
+      max-width: 42rem;
+      margin: 0 auto 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    .app-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
     }
 
     .about-grid {
@@ -335,10 +297,25 @@
       color: var(--ink);
     }
 
-    .about-meta {
-      font-size: 0.85rem;
-      color: var(--ink-muted);
-      margin-top: 1rem;
+    .about-photo-wrapper {
+      margin-top: 1.8rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .about-photo {
+      width: 260px;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 18px 35px rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+    .about-photo img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
     }
 
     .series-card {
@@ -486,6 +463,20 @@
       color: var(--ink-muted);
     }
 
+    .logo-strip {
+      margin-top: 2.5rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-strip img {
+      max-width: 240px;
+      height: auto;
+      opacity: 0.9;
+    }
+
     footer {
       border-top: 1px solid rgba(30,64,175,0.4);
       padding: 1.5rem 1.5rem 2rem;
@@ -522,35 +513,14 @@
       margin: 0 0.4rem;
     }
 
-    .logo-strip {
-      margin-top: 2.5rem;
-      margin-bottom: 0.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .logo-strip img {
-      max-width: 240px;
-      height: auto;
-      opacity: 0.9;
-    }
-
     @media (max-width: 768px) {
-      body {
-        background-attachment: scroll;
-      }
-
-      .hero, .about-grid {
+      .hero,
+      .about-grid {
         grid-template-columns: minmax(0, 1fr);
       }
 
       .hero {
         padding: 1.75rem 1.25rem 2.2rem;
-      }
-
-      .hero-cover {
-        order: -1;
       }
 
       .nav-inner {
@@ -563,6 +533,26 @@
         font-size: 0.8rem;
         flex-wrap: wrap;
         justify-content: flex-end;
+      }
+
+      .hero-books {
+        width: 260px;
+        height: 340px;
+        margin: 0 auto;
+      }
+
+      .hero-books .book {
+        width: 180px;
+      }
+
+      .hero-books .transync {
+        left: 20px;
+        top: 20px;
+      }
+
+      .hero-books .ascendant {
+        left: 85px;
+        top: 45px;
       }
     }
   </style>
@@ -585,7 +575,6 @@
   </header>
 
   <main>
-    <!-- HERO -->
     <section class="hero">
       <div>
         <div class="hero-kicker">Science Fiction Author</div>
@@ -618,43 +607,33 @@
       </div>
     </section>
 
-    <!-- ABOUT -->
+    <section class="app-section">
+      <div class="section-kicker">Follow Along in the App</div>
+      <h2 class="app-subtitle">The Dova Sku Series Companion App</h2>
+      <p class="app-description">
+        Download THE DOVA SKU SERIES COMPANION APP and follow along while you read or listen to the books. I am always working to improve the experience with new features.
+      </p>
+      <div class="app-buttons">
+        <a href="#" class="btn btn-primary">App Store</a>
+        <a href="#" class="btn btn-ghost">Google Play</a>
+      </div>
+    </section>
+
     <section id="about">
       <div class="section-kicker">About the Author</div>
       <h2>Corey Italiano</h2>
 
       <div class="about-grid">
         <div class="about-card">
-          <p><strong>Short version:</strong> Corey Italiano grew up on a
-            lakeshore outside Idaho Falls, Idaho, where his childhood was
-            equal parts dirt bikes, rifles, camping trips, and dreaming about
-            being a spy or a ninja. School was secondary to anything
-            involving speed, risk, or a good story, but a Nintendo NES at six
-            years old and a lifelong love of video games hard-wired his
-            imagination for science fiction.</p>
+          <p><strong>Short version:</strong> Corey Italiano grew up on a lakeshore outside Idaho Falls, Idaho, where his childhood was equal parts dirt bikes, rifles, camping trips, and dreaming about being a spy or a ninja. School was secondary to anything involving speed, risk, or a good story, but a Nintendo NES at six years old and a lifelong love of video games hard-wired his imagination for science fiction.</p>
 
-          <p>As an adult, Corey bounced across five states and several
-            countries, worked for years in real estate like his mother, and
-            eventually shifted into life as a smart home and security
-            technician—squeezing writing time into the cracks. An unapologetic
-            adrenaline junkie, he's broken more bones than he cares to count
-            and now carries titanium in both shoulders thanks to motorcycle
-            and snowboarding accidents… which haven't slowed him down on the
-            slopes or on his Harley.</p>
+          <p>As an adult, Corey bounced across five states and several countries, worked for years in real estate like his mother, and eventually shifted into life as a smart home and security technician—squeezing writing time into the cracks. An unapologetic adrenaline junkie, he’s broken more bones than he cares to count and now carries titanium in both shoulders thanks to motorcycle and snowboarding accidents… which haven’t slowed him down on the slopes or on his Harley.</p>
 
-          <p>A lifelong sci-fi addict, Corey has read or listened to hundreds
-            of books about space, aliens, and strange new worlds. One
-            afternoon, intending to write a song, he instead wrote the
-            prologue to what became <em>Transync</em>, his debut novel
-            and the opening salvo of <em>The Dova Sku Series</em>. Two and a
-            half years later, that "happy accident" became a full-blown career
-            pivot. He has no plans to stop telling stories about dangerous
-            planets, stubborn humans, and the mysteries of the universe.
-          </p>
+          <p>A lifelong sci-fi addict, Corey has read or listened to hundreds of books about space, aliens, and strange new worlds. One afternoon, intending to write a song, he instead wrote the prologue to what became <em>Transync</em>, his debut novel and the opening salvo of <em>The Dova Sku Series</em>. Two and a half years later, that “happy accident” became a full-blown career pivot. He has no plans to stop telling stories about dangerous planets, stubborn humans, and the mysteries of the universe.</p>
 
           <div class="about-photo-wrapper">
             <div class="about-photo">
-              <img src="images/headshot.png" alt="Author photo of Corey Italiano" loading="lazy">
+              <img src="images/headshot.png" alt="Author photo of Corey Italiano">
             </div>
           </div>
         </div>
@@ -663,33 +642,25 @@
           <div class="series-tag">The Dova Sku Series</div>
           <div class="series-title">One soldier. One crew. A planet with dangers around every corner.</div>
           <p class="series-meta">
-            Humanity's first interstellar mission reaches Catora, a habitable world sixty
-            light-years from Earth. What begins as exploration quickly becomes a test of survival.
+            Humanity’s first interstellar mission reaches Catora, a habitable world sixty light-years from Earth. What begins as exploration quickly becomes a test of survival.
 
-            Lieutenant Christopher Thompkins leads the military contingent tasked with securing
-            the landing zone, protecting civilian scientists, and establishing humanity's first
-            foothold on an alien planet. Catora is rich with unfamiliar life, hostile terrain,
-            and unsettling signs that the world is not as untouched as it appears.
+            Lieutenant Christopher Thompkins leads the military contingent tasked with securing the landing zone, protecting civilian scientists, and establishing humanity’s first foothold on an alien planet. Catora is rich with unfamiliar life, hostile terrain, and unsettling signs that the world is not as untouched as it appears.
 
-            As strange creatures emerge and evidence of a long-lost civilization comes to light,
-            assumptions collapse and the mission's priorities shift. What Chris and his team
-            believed they were prepared for proves dangerously incomplete.
+            As strange creatures emerge and evidence of a long-lost civilization comes to light, assumptions collapse and the mission’s priorities shift. What Chris and his team believed they were prepared for proves dangerously incomplete.
 
-            TRANSYNC follows the fight to survive on a new world—and the moment when discovery
-            forces humanity to confront a reality far larger, and far more dangerous, than anyone expected.
+            TRANSYNC follows the fight to survive on a new world—and the moment when discovery forces humanity to confront a reality far larger, and far more dangerous, than anyone expected.
           </p>
 
           <div class="featured-books">
             <article class="book-card">
               <div class="book-thumb">
-                <img src="images/TransyncFrontV2.jpg" alt="Transync book cover" loading="lazy">
+                <img src="images/TransyncFrontV2.jpg" alt="Transync book cover">
               </div>
               <div class="book-body">
                 <div class="book-series-label">Book 1 · The Dova Sku Series</div>
                 <h3>Transync</h3>
                 <p class="book-tagline">
-                  First contact, ancient tech, alien creatures, and a soldier
-                  who will do whatever it takes to protect his team.
+                  First contact, ancient tech, alien creatures, and a soldier who will do whatever it takes to protect his team.
                 </p>
                 <div class="book-actions">
                   <a href="books.html#transync" class="pill pill-highlight">Details</a>
@@ -699,15 +670,13 @@
 
             <article class="book-card">
               <div class="book-thumb">
-                <img src="images/AscendantCover.png" alt="Ascendant book cover" loading="lazy">
+                <img src="images/AscendantCover.png" alt="Ascendant book cover">
               </div>
               <div class="book-body">
                 <div class="book-series-label">Book 2 · The Dova Sku Series</div>
                 <h3>Ascendant</h3>
                 <p class="book-tagline">
-                  What if everything you survived was only the beginning?
-                  The first expedition to Catora was meant to explore a new world.
-                  What it uncovered was something far older, far more complex, and far less forgiving than anyone imagined.
+                  What if everything you survived was only the beginning? The first expedition to Catora was meant to explore a new world. What it uncovered was something far older, far more complex, and far less forgiving than anyone imagined.
                 </p>
                 <div class="book-actions">
                   <a href="books.html#ascendant" class="pill pill-highlight">Details</a>
@@ -719,44 +688,34 @@
       </div>
     </section>
 
-    <!-- FUTURE PROJECTS -->
     <section id="future">
       <div class="section-kicker">Beyond Catora</div>
       <h2>Other Worlds &amp; Future Projects</h2>
       <p class="section-lede">
-        The Dova Sku Series will continue in the third book, and more strange new worlds
-        are on the way. Stay tuned for future standalone novels and a new series set on a strange
-        world, buried deep in mystery.
+        The Dova Sku Series will continue in the third book, and more strange new worlds are on the way. Stay tuned for future standalone novels and a new series set on a strange world, buried deep in mystery.
       </p>
 
       <div class="future-card">
         <strong>Book 3 – The Dova Sku Series (Title TBA)</strong>
         <p>
-          The Dova Sku Series is a military science fiction saga that begins
-          with humanity's first fight to survive on an alien world—and expands
-          into a conflict where human consciousness, artificial intelligence,
-          and ancient powers collide. The story continues in Book 3 with new
-          revelations that Chris and his team never expected.
+          The Dova Sku Series is a military science fiction saga that begins with humanity’s first fight to survive on an alien world—and expands into a conflict where human consciousness, artificial intelligence, and ancient powers collide. The story continues in Book 3 with new revelations that Chris and his team never expected.
         </p>
         <p>
-          Want to know when it drops—and when new standalones go live?
-          Join the mailing list below, and you'll hear about it first.
+          Want to know when it drops—and when new standalones go live? Join the mailing list below, and you’ll hear about it first.
         </p>
       </div>
     </section>
 
-    <!-- NEWSLETTER / CONTACT -->
     <section id="newsletter">
       <div class="section-kicker">Stay Updated</div>
       <h2>Get New Release Alerts</h2>
       <p class="section-lede">
-        No spam, no weekly noise—just an occasional note when there's
-        something worth knowing: a new book, a cover reveal, or a big sale.
+        No spam, no weekly noise—just an occasional note when there’s something worth knowing: a new book, a cover reveal, or a big sale.
       </p>
 
       <div class="newsletter">
         <form action="mailto:imaginariumitaliano@gmail.com" method="post" enctype="text/plain">
-          <input type="email" name="email" placeholder="your@email.com" required>
+          <input type="email" name="email" placeholder="imaginariumitaliano@gmail.com" required>
           <button type="submit" class="btn btn-primary">Notify Me</button>
         </form>
         <small>
@@ -771,7 +730,7 @@
     </section>
 
     <div class="logo-strip">
-      <img src="images/Logo.png" alt="Corey Italiano logo" loading="lazy">
+      <img src="images/Logo.png" alt="Corey Italiano logo">
     </div>
   </main>
 
