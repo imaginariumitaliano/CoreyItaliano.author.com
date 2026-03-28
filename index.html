@@ -166,7 +166,45 @@
       gap: 0.75rem;
       margin-bottom: 1.75rem;
     }
+    .hero-books {
+      position: relative;
+      width: 320px;
+      height: 420px;
+    }
 
+    .hero-books .book {
+      position: absolute;
+      width: 220px;
+      border-radius: 8px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      transition: transform 0.3s ease;
+    }
+    
+    /* Transync (front, tilted left) */
+    .hero-books .transync {
+      transform: rotate(-30deg);
+      z-index: 2;
+      left: 40px;
+      top: 20px;
+    }
+
+    /* Ascendant (behind, tilted right) */
+    .hero-books .ascendant {
+      transform: rotate(30deg);
+      z-index: 1;
+      left: 100px;
+      top: 60px;
+    }
+    
+    /* Optional hover effect */
+    .hero-books:hover .transync {
+      transform: rotate(-25deg) scale(1.05);
+    }
+    
+    .hero-books:hover .ascendant {
+      transform: rotate(25deg) scale(1.05);
+    }
+    
     .btn {
       display: inline-flex;
       align-items: center;
@@ -567,12 +605,10 @@
         </p>
       </div>
 
-      <div class="hero-cover">
-        <div class="hero-cover-inner">
-          <!-- Feature Ascendant by default -->
-          <img src="images/AscendantCover.png" alt="Ascendant book cover">
-          <div class="hero-kicker">Latest Release</div>
-        </div>
+      <div class="hero-books">
+        <img src="images/transync-cover.png" class="book transync" />
+        <img src="images/ascendant-cover.png" class="book ascendant" />
+      </div>
       </div>
     </section>
 
