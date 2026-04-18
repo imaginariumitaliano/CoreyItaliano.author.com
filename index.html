@@ -286,7 +286,23 @@
       gap: 0.75rem;
       flex-wrap: wrap;
     }
+    
+    .app-screenshots {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
 
+    .app-screenshots img {
+      width: 100%;
+      height: auto;
+      border-radius: 1rem;
+      border: 1px solid rgba(148,163,184,0.25);
+      box-shadow: 0 16px 35px rgba(0,0,0,0.5);
+      object-fit: cover;
+    }
+    
     .about-grid {
       display: grid;
       grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.4fr);
@@ -625,6 +641,12 @@
 
     <!-- COMPANION APP -->
     <section class="app-section">
+      <div class="app-screenshots">
+        <img src="images/app-screen-1.png" alt="App screenshot 1">
+        <img src="images/app-screen-2.png" alt="App screenshot 2">
+        <img src="images/app-screen-3.png" alt="App screenshot 3">
+        <img src="images/app-screen-4.png" alt="App screenshot 4">
+      </div>
       <div class="section-kicker">Follow Along in the App</div>
       <h2 class="app-subtitle">The Dova Sku Series Companion App</h2>
       <p class="app-description">
