@@ -335,22 +335,28 @@
           <dt>Voice</dt>
           <dd>whisper.cpp, Piper, custom openWakeWord model</dd>
           <dt>Integrations</dt>
-          <dd>Anthropic, OpenAI, Google Drive and Docs</dd>
+          <dd>Anthropic, OpenAI, Google Drive and Docs, Telegram</dd>
+          <dt>Reach</dt>
+          <dd>Desktop, Telegram, and phone over HTTPS via Tailscale</dd>
           <dt>Source</dt>
-          <dd>Private. Architecture write-up available on request.</dd>
+          <dd>Private</dd>
         </dl>
       </div>
       <div class="body">
         <h3>The problem</h3>
         <p>One assistant, two incompatible requirements. Manuscript work is private and needs to run without a network; the heaviest reasoning needs a frontier model. Picking one means giving up the other.</p>
         <h3>What I built</h3>
-        <p>An orchestrator that routes each request to the right place — a fast local model for private, offline, and quick work, Claude or GPT when the reasoning justifies the round trip. Underneath it, a memory layer pairing a vector store with a shared markdown story bible that holds characters, world rules, brand voice, and the social calendar, so every model in the system answers from the same canon.</p>
+        <p>An orchestrator that routes each request to the right place — a fast local model for private, offline, and quick work, Claude or GPT when the reasoning justifies the round trip. Underneath it, a memory layer pairing a vector store with a shared markdown story bible that holds characters, world rules, brand voice, and the social calendar, so every model in the system answers from the same canon. It reaches me on the desktop, through Telegram, and from a phone over HTTPS via Tailscale — one backend behind all three, not three separate builds.</p>
         <h3>Decisions worth naming</h3>
-        <p>Manuscripts mirror from Google Drive into a local cache rather than being fetched live, which keeps latency and API calls out of the conversation loop. Edits dictated aloud apply to the live Google Doc as surgical in-place replacements through the Docs API, never whole-file overwrites, so formatting survives — and when a passage isn't found, or matches twice, the system reports it and changes nothing rather than guessing. Spoken observations are routed to a separate timestamped notes file and never written into the manuscript. The difference between an edit and a note is the kind of distinction that decides whether anyone trusts a system with their own work.</p>
+        <p>Manuscripts mirror into a local cache rather than being fetched live, which keeps latency and API calls out of the conversation loop. A local manuscripts folder and its Drive counterpart are treated as two synced copies of one document, not one replacing the other.</p>
+        <p>Edits dictated aloud apply as surgical in-place replacements, never whole-file rewrites — through the Docs API when the manuscript is a native Google Doc, and by editing a local copy and pushing the identical change back to Drive when it is a plain Word file, which the Docs API cannot open at all. When a passage is not found, matches twice, or the Drive file has changed since the last sync, the system reports it and changes nothing rather than guessing.</p>
+        <p>Spoken observations are routed to a separate timestamped notes file and never written into the manuscript. The difference between an edit and a note is the kind of distinction that decides whether anyone trusts a system with their own work.</p>
         <h3>Voice</h3>
         <p>Wake word runs fully offline on a model I trained myself on "hey liam" rather than a stock keyword, in its own process because it has to listen system-wide. Speech in through whisper.cpp, out through Piper, interruptible at sentence boundaries so you can stop a reading mid-chapter and redirect it.</p>
         <h3>Testing</h3>
-        <p>The test suite is not comprehensive and is not meant to be. It covers the three paths that have actually broken in real use — role-gated imports crashing a bare hub install, the mobile auth middleware, and chapter-number parsing — as a guard against regressing those specific incidents.</p>
+        <p>The test suite is not comprehensive and is not meant to be. It covers the specific paths that have actually broken in real use — filename matching, document parsing, authentication, reading-session state — as a guard against regressing those incidents rather than as a coverage target.</p>
+        <h3>A bug worth describing</h3>
+        <p>The wake-word model does not score each audio frame in isolation. It scores against a rolling internal buffer accumulated across every prediction call, and that buffer was not being cleared mid-conversation — so a single 80-millisecond frame, far too short to contain anyone speaking, could re-trigger a wake detection purely because the buffer was still coasting on a trigger from minutes earlier. Confirmed by reading the model library's own source rather than inferred from the behavior.</p>
       </div>
     </article>
 
