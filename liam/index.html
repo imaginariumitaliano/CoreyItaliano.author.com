@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Liam — architecture</title>
+<meta name="description" content="How Liam is built: a hybrid local-and-cloud AI assistant — routing, memory, document sync, voice, and honest limits.">
+<!-- Unlisted by design, same pattern as /portfolio -- shared only by direct
+     link, not reachable from any site nav and not meant to turn up in
+     search. og:* below only affects the preview card when this URL is
+     pasted somewhere (LinkedIn, Slack, email) -- unrelated to noindex,
+     which only governs crawlers. No robots.txt entry for this path either,
+     deliberately: an earlier Disallow rule for /portfolio/ blocked
+     LinkedIn's own preview bot from fetching the page at all (2026-10-07,
+     see that repo's commit removing it) -- this meta tag is the correct
+     mechanism, since it still lets a bot fetch the page to build a preview
+     when someone deliberately shares the link, while keeping compliant
+     search engines from indexing it. -->
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Liam — architecture">
+<meta property="og:description" content="How Liam is built: a hybrid local-and-cloud AI assistant — routing, memory, document sync, voice, and honest limits.">
+<meta property="og:url" content="https://corey-italiano.com/liam/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ground:#E6E8E3;
+    --ground-2:#F1F2EE;
+    --ink:#15191C;
+    --ink-2:#5B646A;
+    --ink-3:#8A9298;
+    --accent:#1F3A5F;
+    --signal:#C8761A;
+    --rule:#C9CDC6;
+    --maxw:68rem;
+    --proseW:42rem;
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root{
+      --ground:#15171A;
+      --ground-2:#1C1F23;
+      --ink:#ECEDEA;
+      --ink-2:#9BA3A8;
+      --ink-3:#6E767C;
+      --accent:#6E9BD1;
+      --signal:#D9873A;
+      --rule:#2E3338;
+    }
+  }
+
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+
+  body{
+    margin:0;
+    background:var(--ground);
+    color:var(--ink);
+    font-family:"Source Serif 4",Georgia,serif;
+    font-size:1.0625rem;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(31,58,95,.3);}
+  a:hover{border-bottom-color:var(--accent);}
+  a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px;}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 2rem;}
+  .prose{max-width:var(--proseW);}
+
+  .masthead{
+    display:flex;flex-wrap:wrap;gap:1rem 2rem;align-items:baseline;
+    justify-content:space-between;padding:2.25rem 0 0;
+  }
+  .wordmark{font-family:Archivo,system-ui,sans-serif;font-weight:700;font-size:1rem;letter-spacing:.01em;margin:0;}
+  .masthead nav{font-family:Archivo,system-ui,sans-serif;font-size:.875rem;font-weight:500;display:flex;gap:1.5rem;flex-wrap:wrap;}
+  .masthead nav a{border-bottom-color:rgba(31,58,95,.25);}
+
+  .hero{padding:4.5rem 0 1rem;}
+  .kicker{
+    font-family:Archivo,system-ui,sans-serif;font-weight:600;font-size:.8125rem;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin:0 0 1rem;
+  }
+  .hero h1{
+    font-family:Archivo,system-ui,sans-serif;font-weight:600;
+    font-size:clamp(2.1rem,5.4vw,3.4rem);line-height:1.05;letter-spacing:-.02em;
+    margin:0 0 1.5rem;max-width:20ch;
+  }
+  .standfirst{max-width:48ch;font-size:1.1875rem;color:var(--ink-2);margin:0 0 1rem;}
+  .meta-line{font-family:Archivo,system-ui,sans-serif;font-size:.8125rem;color:var(--ink-3);margin:0 0 3rem;}
+
+  article{padding-bottom:5rem;}
+
+  .section{padding:3rem 0;border-top:1px solid var(--rule);}
+  .section:first-of-type{border-top:0;}
+  .section h2{
+    font-family:Archivo,system-ui,sans-serif;font-weight:600;font-size:1.5rem;
+    letter-spacing:-.01em;margin:0 0 1.25rem;display:flex;align-items:baseline;gap:.75rem;
+  }
+  .section h2 .num{color:var(--ink-3);font-weight:500;font-size:1rem;}
+  .section p{margin:0 0 1.15rem;}
+  .section p:last-child{margin-bottom:0;}
+  .section h3{
+    font-family:Archivo,system-ui,sans-serif;font-size:.9375rem;font-weight:600;
+    color:var(--ink-2);margin:1.75rem 0 .5rem;
+  }
+
+  .callout{
+    margin:1.5rem 0 0;padding:1rem 1.25rem;background:var(--ground-2);
+    border-left:2px solid var(--signal);font-size:.9375rem;
+  }
+  .callout p{margin:0;}
+  .callout p + p{margin-top:.75rem;}
+
+  ul.limits{margin:0;padding:0;list-style:none;max-width:var(--proseW);}
+  ul.limits li{
+    padding:1rem 0;border-top:1px solid var(--rule);
+  }
+  ul.limits li:first-child{border-top:0;padding-top:0;}
+  ul.limits strong{font-family:Archivo,system-ui,sans-serif;font-weight:600;font-size:.9375rem;}
+
+  .diagram-wrap{margin:1.5rem 0 0;}
+  .diagram-wrap svg{width:100%;height:auto;display:block;}
+  .diagram-caption{font-family:Archivo,system-ui,sans-serif;font-size:.8125rem;color:var(--ink-3);margin-top:.75rem;max-width:var(--proseW);}
+
+  .contact{padding:4rem 0 5rem;border-top:1px solid var(--rule);}
+  .contact p{
+    font-family:Archivo,system-ui,sans-serif;font-size:clamp(1.15rem,2.6vw,1.5rem);
+    font-weight:500;letter-spacing:-.01em;margin:0 0 1.25rem;max-width:30ch;line-height:1.3;
+  }
+  .contact ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.75rem 2rem;font-family:Archivo,system-ui,sans-serif;font-size:.9375rem;}
+
+  @media (max-width:46rem){
+    .wrap{padding:0 1.35rem;}
+    .hero{padding:3rem 0 1rem;}
+    .section{padding:2.25rem 0;}
+    .section h2{font-size:1.3125rem;}
+  }
+</style>
+</head>
+<body>
+
+<header class="wrap masthead">
+  <p class="wordmark">Corey Italiano</p>
+  <nav>
+    <a href="mailto:paisanitaliano@gmail.com">paisanitaliano@gmail.com</a>
+    <a href="https://github.com/imaginariumitaliano">GitHub</a>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <p class="kicker">Architecture notes</p>
+    <h1>How Liam is built.</h1>
+    <p class="standfirst">Liam's source is private. This page isn't — it's a real account of the design, written the way I'd document it for someone else to maintain, not as a pitch. Where the code and a tidier description would disagree, this follows the code.</p>
+    <p class="meta-line">Last reviewed October 2026 · Referenced from the <a href="/portfolio/#liam">portfolio</a></p>
+  </section>
+
+  <article>
+
+    <section class="section" id="what">
+      <h2><span class="num">01</span> What Liam is</h2>
+      <div class="prose">
+        <p>Liam is an assistant built for one person's work: running the day-to-day of an independent publishing and marketing operation — manuscript editing, continuity checking, brainstorming, drafting, and social content — plus voice interaction while writing or recording, where typing isn't practical. It isn't a product. There's one user, one canon of reference material it knows, and one set of credentials that can reach it. It's reachable from a desktop app, a phone, and a messaging bot, all backed by the same running process rather than three separate builds.</p>
+      </div>
+    </section>
+
+    <section class="section" id="hybrid">
+      <h2><span class="num">02</span> Why hybrid</h2>
+      <div class="prose">
+        <p>The starting constraint: no model that runs entirely on a laptop, with no network connection, matches a frontier cloud model for the heaviest reasoning. But routing everything to the cloud gives up three things that matter for this specific use — the ability to keep working with no internet, keeping manuscript content off a network call by default, and not paying cloud-model latency for a routine request that a local model can answer just as well.</p>
+        <p>So the system doesn't pick one. A router sits between the interface and the models and decides, per request, where a message actually goes: a locally hosted model for private, offline-fine, or quick work; a frontier model when the request is heavy enough — real structural editing, developmental feedback, anything where the reasoning gap still matters — to justify the round trip. The router is the one piece of this that makes the hybrid idea real rather than aspirational; everything else is built to make its decision cheap to act on, by keeping memory and document state available to whichever backend actually answers.</p>
+        <p>The same idea extends one level up, not just between models but between machines: a second always-on machine is designed to take on heavier or longer-running work when it's reachable, registering itself and being handed tasks the same way a model is chosen — see <a href="#limits">what this is not</a> for where that stands today.</p>
+      </div>
+    </section>
+
+    <section class="section" id="architecture">
+      <h2><span class="num">03</span> Architecture</h2>
+      <div class="prose">
+        <p>One backend process serves every interface. The desktop app, the phone page, and the messaging bot all call the same API surface rather than each having their own routing, memory, or document logic — a fix applied once reaches all three at once, and a bug fixed in one place can't still be live in another.</p>
+      </div>
+
+      <div class="diagram-wrap" role="img" aria-label="Diagram: Desktop, Phone, and Telegram all connect to one backend process, which hands requests to a router. The router reads from a memory layer and a documents layer, and sends the request to a local model, Claude, or GPT depending on what the request needs. A voice daemon runs as its own process and talks to the backend through the same API.">
+        <svg viewBox="0 0 860 420" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="var(--ink-3)"></path>
+            </marker>
+          </defs>
+
+          <!-- interfaces row -->
+          <g font-family="Archivo, system-ui, sans-serif" font-size="14" font-weight="600">
+            <rect x="20" y="20" width="120" height="48" rx="6" fill="none" stroke="var(--rule)" stroke-width="1.5"></rect>
+            <text x="80" y="49" text-anchor="middle" fill="var(--ink)">Desktop</text>
+
+            <rect x="160" y="20" width="120" height="48" rx="6" fill="none" stroke="var(--rule)" stroke-width="1.5"></rect>
+            <text x="220" y="49" text-anchor="middle" fill="var(--ink)">Phone</text>
+
+            <rect x="300" y="20" width="120" height="48" rx="6" fill="none" stroke="var(--rule)" stroke-width="1.5"></rect>
+            <text x="360" y="49" text-anchor="middle" fill="var(--ink)">Telegram</text>
+          </g>
+
+          <!-- lines interfaces -> backend, each arriving at its own point along the top edge -->
+          <path d="M80,68 L80,95 Q80,105 90,105 L170,105 L170,110" fill="none" stroke="var(--ink-3)" stroke-width="1.5" marker-end="url(#arrow)"></path>
+          <path d="M220,68 L220,110" fill="none" stroke="var(--ink-3)" stroke-width="1.5" marker-end="url(#arrow)"></path>
+          <path d="M360,68 L360,95 Q360,105 350,105 L290,105 L290,110" fill="none" stroke="var(--ink-3)" stroke-width="1.5" marker-end="url(#arrow)"></path>
+
+          <!-- backend -->
+          <g font-family="Archivo, system-ui, sans-serif" font-weight="600">
+            <rect x="130" y="110" width="200" height="54" rx="6" fill="var(--ground-2)" stroke="var(--rule)" stroke-width="1.5"></rect>
+            <text x="230" y="142" text-anchor="middle" font-size="15" fill="var(--ink)">Backend</text>
+            <text x="230" y="158" text-anchor="middle" font-size="11" font-weight="500" fill="var(--ink-3)">one process, every interface</text>
+          </g>
+
+          <!-- backend -> router -->
+          <path d="M230,164 L230,195" fill="none" stroke="var(--ink-3)" stroke-width="1.5" marker-end="url(#arrow)"></path>
+
+          <!-- router -->
+          <g font-family="Archivo, system-ui, sans-serif" font-weight="600">
+            <rect x="130" y="195" width="200" height="54" rx="6" fill="var(--ground-2)" stroke="var(--signal)" stroke-width="1.5"></rect>
+            <text x="230" y="227" text-anchor="middle" font-size="15" fill="var(--ink)">Router</text>
+            <text x="230" y="243" text-anchor="middle" font-size="11" font-weight="500" fill="var(--ink-3)">decides where a request goes</text>
+          </g>
+
+          <!-- router -> models -->
+          <path d="M190,249 L130,300 Q120,310 120,318 L120,330" fill="none" stroke="var(--ink-3)" stroke-width="1.5" marker-end="url(#arrow)"></path>
+          <path d="M230,249 L230,330" fill="none" stroke="var(--ink-3)" stroke-width="1.5" marker-end="url(#arrow)"></path>
+          <path d="M270,249 L330,300 Q340,310 340,318 L340,330" fill="none" stroke="var(--ink-3)" stroke-width="1.5" marker-end="url(#arrow)"></path>
+
+          <!-- models row -->
+          <g font-family="Archivo, system-ui, sans-serif" font-size="14" font-weight="600">
+            <rect x="60" y="330" width="120" height="48" rx="6" fill="none" stroke="var(--rule)" stroke-width="1.5"></rect>
+            <text x="120" y="359" text-anchor="middle" fill="var(--ink)">Local model</text>
+
+            <rect x="200" y="330" width="60" height="48" rx="6" fill="none" stroke="var(--rule)" stroke-width="1.5"></rect>
+            <text x="230" y="359" text-anchor="middle" fill="var(--ink)">Claude</text>
+
+            <rect x="280" y="330" width="60" height="48" rx="6" fill="none" stroke="var(--rule)" stroke-width="1.5"></rect>
+            <text x="310" y="359" text-anchor="middle" fill="var(--ink)">GPT</text>
+          </g>
+
+          <!-- memory layer, side -->
+          <g font-family="Archivo, system-ui, sans-serif" font-weight="600">
+            <rect x="420" y="100" width="210" height="64" rx="6" fill="none" stroke="var(--rule)" stroke-width="1.5" stroke-dasharray="4 3"></rect>
+            <text x="525" y="128" text-anchor="middle" font-size="14" fill="var(--ink)">Memory</text>
+            <text x="525" y="146" text-anchor="middle" font-size="11" font-weight="500" fill="var(--ink-3)">vector store +</text>
+            <text x="525" y="159" text-anchor="middle" font-size="11" font-weight="500" fill="var(--ink-3)">shared reference</text>
+          </g>
+          <path d="M420,132 L330,215" fill="none" stroke="var(--ink-3)" stroke-width="1.5" stroke-dasharray="3 3" marker-end="url(#arrow)"></path>
+
+          <!-- documents layer, side -->
+          <g font-family="Archivo, system-ui, sans-serif" font-weight="600">
+            <rect x="420" y="190" width="210" height="64" rx="6" fill="none" stroke="var(--rule)" stroke-width="1.5" stroke-dasharray="4 3"></rect>
+            <text x="525" y="218" text-anchor="middle" font-size="14" fill="var(--ink)">Documents</text>
+            <text x="525" y="236" text-anchor="middle" font-size="11" font-weight="500" fill="var(--ink-3)">local cache, synced</text>
+            <text x="525" y="249" text-anchor="middle" font-size="11" font-weight="500" fill="var(--ink-3)">with the cloud copy</text>
+          </g>
+          <path d="M420,222 L330,235" fill="none" stroke="var(--ink-3)" stroke-width="1.5" stroke-dasharray="3 3" marker-end="url(#arrow)"></path>
+
+          <!-- voice daemon -->
+          <g font-family="Archivo, system-ui, sans-serif" font-weight="600">
+            <rect x="460" y="300" width="170" height="78" rx="6" fill="none" stroke="var(--rule)" stroke-width="1.5"></rect>
+            <text x="545" y="328" text-anchor="middle" font-size="14" fill="var(--ink)">Voice daemon</text>
+            <text x="545" y="346" text-anchor="middle" font-size="11" font-weight="500" fill="var(--ink-3)">wake word, speech in/out</text>
+            <text x="545" y="362" text-anchor="middle" font-size="11" font-weight="500" fill="var(--signal)">own process</text>
+          </g>
+          <path d="M460,339 L330,145" fill="none" stroke="var(--ink-3)" stroke-width="1.5" marker-end="url(#arrow)"></path>
+
+          <!-- legend -->
+          <g font-family="Archivo, system-ui, sans-serif" font-size="11" font-weight="500" fill="var(--ink-3)">
+            <line x1="700" y1="320" x2="725" y2="320" stroke="var(--ink-3)" stroke-width="1.5"></line>
+            <text x="733" y="324">calls</text>
+            <line x1="700" y1="345" x2="725" y2="345" stroke="var(--ink-3)" stroke-width="1.5" stroke-dasharray="3 3"></line>
+            <text x="733" y="349">reads from</text>
+          </g>
+        </svg>
+      </div>
+      <p class="diagram-caption">Everything downstream of the backend — routing, memory, documents, voice — is shared; nothing downstream knows or cares which interface a request came in through.</p>
+
+      <div class="prose" style="margin-top:2rem">
+        <p>Each piece is meant to be replaceable without the others caring: the router doesn't know which interface sent a request, the models don't know how memory was assembled, and the voice daemon talks to the backend through the same API surface the browser uses rather than a special internal path. That's less an elegance preference than a practical one — the voice daemon in particular has to run in its own OS process (more on why in <a href="#voice">Voice</a>), so a shared API was the only option that didn't mean duplicating the routing and memory logic a second time.</p>
+      </div>
+    </section>
+
+    <section class="section" id="memory">
+      <h2><span class="num">04</span> Memory and canon</h2>
+      <div class="prose">
+        <p>Two things, paired. A vector store indexes manuscript content so it can be retrieved by meaning, not just by filename. Alongside it, a shared structured reference — plain text, not a database — holds the material that has to stay consistent no matter which model answers: character and world detail, terminology, house style, the kind of thing a human editor would call a style guide. Every model in the system, local or cloud, reads from the same reference before answering, rather than each one building its own independent sense of what's correct.</p>
+        <p>The reason this got built at all: a hybrid system answers the same kind of question from different backends on different turns, sometimes within the same conversation. Without a shared source of truth, that's a direct path to the system contradicting itself — a detail stated one way by the local model and a different way by a cloud model an hour later, with no way to tell which one is authoritative. The reference exists so that question doesn't come up.</p>
+      </div>
+    </section>
+
+    <section class="section" id="documents">
+      <h2><span class="num">05</span> Documents: sync and editing</h2>
+      <div class="prose">
+        <p>Working documents live in cloud storage and mirror into a local cache. Reads come from the cache — no live network call sits in the conversation loop — and the local copy and its cloud counterpart are treated as two synced copies of the same document, neither one authoritative over the other. An edit made through one propagates to the other; the system doesn't assume the local copy should simply replace the cloud one, or the reverse.</p>
+        <h3>How an edit actually applies</h3>
+        <p>A dictated edit never rewrites a whole file. It applies as a targeted, in-place replacement of the specific passage named — through a direct document-editing API when the file format supports it, or by editing the local cached copy and pushing the identical change back when it doesn't (a plain word-processor file, for instance, where that API simply can't open the format at all). Both paths land on the same outcome: one passage changed, everything else untouched.</p>
+        <h3>When it refuses</h3>
+        <p>If the requested passage isn't found, if it matches in more than one place, or if the cloud copy has changed since the last sync, the system reports that and changes nothing. No best-effort guess, no silent overwrite. That refusal is the actual point of this whole path — the alternative is a system that sometimes edits the wrong sentence and never tells you.</p>
+      </div>
+    </section>
+
+    <section class="section" id="voice">
+      <h2><span class="num">06</span> Voice</h2>
+      <div class="prose">
+        <p>The wake word is a custom-trained model on the assistant's own name, not a stock keyword — trained once, offline, against a purpose-built dataset rather than reused from a general voice-assistant library. It runs in a separate OS process from the rest of the system, because it has to listen continuously, system-wide, regardless of which window or app currently has focus; that's not something a browser tab or a single in-app component can do on its own.</p>
+        <p>Speech in and speech out both run on local, offline engines — dictation and spoken replies don't depend on a network connection even when the request itself gets routed to a cloud model. Replies are interruptible at sentence boundaries, so a long passage being read aloud can be stopped and redirected mid-stream instead of having to finish.</p>
+        <div class="callout">
+          <p>One deliberate behavioral limit, not an oversight: the system doesn't listen for a new wake word while it's actively speaking. With no acoustic echo cancellation in this setup, the assistant's own voice can leak back into the microphone at close to full confidence — a real, measured false trigger during testing, not a hypothetical one. Listening resumes in the gaps between spoken segments instead, which is close to but not identical to true mid-sentence interruption.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="boundaries">
+      <h2><span class="num">07</span> Boundaries</h2>
+      <div class="prose">
+        <p>By default, nothing leaves the machine: raw audio, the local model's reasoning, and cached document content all stay local unless the router decides a specific request is worth sending onward. What does leave, when it does, is the text of that request and whatever context it needs — sent to a model provider's API over an encrypted connection, nothing more.</p>
+        <p>The language layer — whatever model is answering a given request — is kept separate from anything that can actually change a file. A model doesn't get general file-system or shell access; the only write path is the narrow, specific one described above, with its own refusal rules, not a general-purpose tool a model could point anywhere. Remote reach works the same way: the system is reachable off the local network only over a private, authenticated connection (a mesh VPN, not a port opened to the public internet), every request carries a credential, and repeated failed attempts from the same source get temporarily locked out rather than allowed to keep guessing.</p>
+      </div>
+    </section>
+
+    <section class="section" id="testing">
+      <h2><span class="num">08</span> Testing</h2>
+      <div class="prose">
+        <p>The automated suite is deliberately narrow: it covers the specific paths that have actually broken in real use — document and filename matching, authentication, reading-session state — as a guard against regressing those particular incidents, not as a general coverage target. That's a real trade-off, made on purpose, for a single-user tool where the cost of a gap is personal inconvenience, not a production outage.</p>
+        <p>The voice layer has no automated coverage at all. It depends on a separate runtime environment that the main test setup can't even import, which is a real gap, not a stylistic choice — every fix to the wake-word or speech pipeline has been verified by actually using it and reading the logs afterward, not by a test suite catching a regression before it shipped.</p>
+      </div>
+    </section>
+
+    <section class="section" id="limits">
+      <h2><span class="num">09</span> What this is not</h2>
+      <div class="prose">
+        <p>Said plainly, not softened:</p>
+      </div>
+      <ul class="limits">
+        <li><strong>Built for one person.</strong> Single authorized user, one person's reference material, one set of credentials. Nothing about the design assumes more than one person will ever use it.</li>
+        <li><strong>Phase one of a larger plan.</strong> A second always-on machine is meant to eventually handle home-automation work entirely separate from this assistant, registering with this system and taking over heavier tasks when reachable. The handoff logic between the two is built and its control flow is verified — registration, task handoff, fallback on failure — but it has never run end to end with both machines actually running live models at the same time. The home-automation half hasn't been started at all.</li>
+        <li><strong>No voice testing.</strong> Covered above, repeated here because it belongs in this list too: the voice pipeline's correctness depends entirely on manual verification, not an automated safety net.</li>
+        <li><strong>No native mobile app.</strong> Phone access is a web app added to the home screen, not something installed from an app store — a deliberate choice to avoid a second codebase and a store-review process, not a missing feature.</li>
+        <li><strong>One machine, no redundancy.</strong> Everything runs on a single laptop. If it's off, asleep, or disconnected, nothing is reachable remotely — there's no failover and none is planned while this stays a single-user tool.</li>
+        <li><strong>The marketing-content pipeline is still a plan, not a running system.</strong> Generating a finished social post from a manuscript passage, end to end, is designed but not built; what exists today is the routing and memory underneath it.</li>
+      </ul>
+    </section>
+
+  </article>
+
+  <section class="wrap contact">
+    <p>Questions about any of this, or want to see it work — email me.</p>
+    <ul>
+      <li><a href="mailto:paisanitaliano@gmail.com">paisanitaliano@gmail.com</a></li>
+      <li><a href="/portfolio/">Back to the portfolio</a></li>
+    </ul>
+  </section>
+
+</main>
+
+</body>
+</html>
