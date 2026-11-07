@@ -314,9 +314,9 @@
         <span class="idx-state">In service</span>
       </a>
       <a class="reveal" href="#pipeline">
-        <span class="dot pending" aria-hidden="true"></span>
+        <span class="dot" aria-hidden="true"></span>
         <span class="idx-name">Book marketing automation pipeline</span>
-        <span class="idx-state">In development</span>
+        <span class="idx-state">Live</span>
       </a>
     </div>
   </section>
@@ -413,20 +413,27 @@
     <article class="record" id="pipeline">
       <div>
         <h2>Book marketing automation pipeline</h2>
-        <p class="state"><span class="dot pending" aria-hidden="true"></span>In development</p>
+        <p class="state"><span class="dot" aria-hidden="true"></span>Live</p>
         <dl class="meta">
-          <dt>Stage</dt>
-          <dd>Design and baseline measurement</dd>
-          <dt>Scope</dt>
-          <dd>Generation and human approval gate</dd>
+          <dt>Platforms</dt>
+          <dd>Instagram, Facebook, TikTok</dd>
+          <dt>Built with</dt>
+          <dd>Python, Meta Graph API, TikTok Content Posting API, launchd</dd>
+          <dt>Cadence</dt>
+          <dd>Three posts a week, scheduled and unattended</dd>
+          <dt>Source</dt>
+          <dd>Private</dd>
         </dl>
       </div>
       <div class="body">
-        <h3>What it will do</h3>
-        <p>Manuscript passage in, finished social unit out — image generated against the specification above, quote card composed, video assembled, caption drafted — with a human approval gate before anything publishes. Autonomous publishing is not the goal; a reviewable queue is.</p>
-        <h3>What is being measured</h3>
-        <p>Production time per unit and units shipped per week, recorded before any of it is automated. Without the baseline the result is an impression rather than a number, and an impression is not worth reporting.</p>
-        <div class="caveat">Listed because it is what I am building, not what I have shipped. The three systems above are in service; this one is not yet.</div>
+        <h3>The problem</h3>
+        <p>Posting one chapter excerpt across three platforms by hand took an hour and a half to two hours — writing captions, assembling video per platform, uploading one at a time. At three posts a week, that is real time taken directly from the manuscripts.</p>
+        <h3>What I built</h3>
+        <p>A pipeline that takes a manuscript passage and the matching artwork from the Dova Sku Companion app and generates the video, overlay text, and caption set, then queues the result for approval. Nothing publishes without a human reviewing it first — autonomous publishing was never the goal; removing the manual labor in front of a decision that still needs a person was.</p>
+        <h3>Results</h3>
+        <p>Production time per post dropped from 1.5–2 hours to about five minutes — reviewing and approving what the pipeline already built, not building it by hand. Roughly a 95 percent reduction, measured against the same three-platform baseline recorded before any of it was automated.</p>
+        <h3>A decision worth naming</h3>
+        <p>TikTok keeps direct, fully public posting private until it audits an app. Rather than hold the launch on that, the pipeline shipped in TikTok's "inbox" mode first — it drops a ready-to-post draft into the TikTok app and asks for one tap — so posting started on schedule immediately, with full automation arriving once the audit clears instead of gating on it.</p>
       </div>
     </article>
 
